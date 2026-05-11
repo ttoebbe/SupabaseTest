@@ -1,13 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Supabase } from './supabase';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, JsonPipe],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
   dbService = inject(Supabase);
+
+  ngOnInit(){
+    this.dbService.getProducts();
+  }
 }
