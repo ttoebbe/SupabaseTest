@@ -14,5 +14,7 @@ export class App {
 
   ngOnInit(){
     this.dbService.getProducts();
+    // this.dbService.setProduct({name:'Kopfhörer', count: 20});
+    this.dbService.deleteProduct(4);
   }
 }

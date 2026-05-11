@@ -17,7 +17,7 @@ let { data: products, error } = await this.supabase
   .from('products')
   .select('name, count')
   .range(0, 9)
-  .lte('count', 50)
+  .lte('count', 300)
 
   if(!products) {
     console.error(error);
@@ -25,5 +25,27 @@ let { data: products, error } = await this.supabase
   }
   this.products.set(products);
 }
-        
+
+async setProduct(product: { name:string, count:number}) {
+  const { data, error } = await this.supabase
+  .from('products')
+  .insert([product])
+  .select()
+}
+
+async updateProduct(id: number){
+  const { data, error } = await this.supabase
+  .from('products')
+  .update({ name: 'in-ear-buds' })
+  .eq('id', id)
+  .select()    
+}
+
+async deleteProduct(id: number){
+  const { data, error } = await this.supabase
+  .from('products')
+  .delete()
+  .eq('id', id)
+  .select()    
+}
 }
